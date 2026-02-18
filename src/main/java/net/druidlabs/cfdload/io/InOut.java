@@ -1,0 +1,235 @@
+package net.druidlabs.cfdload.io;
+
+import com.google.gson.Gson;
+import io.github.andruid929.leutils.time.TimeUnitConversion;
+import net.druidlabs.cfdload.api.Download;
+import net.druidlabs.cfdload.errorhandling.ErrorLogger;
+import net.druidlabs.cfdload.mods.Mod;
+import net.druidlabs.cfdload.mods.ModLoader;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.*;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
+import java.util.Set;
+import java.util.concurrent.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public final class InOut {
+
+    @Contract("_ -> new")
+    public static @NotNull Object @NotNull [] readModConfig(Path path) throws IOException {
+        ModLoader modLoader = ModLoader.NO_MOD_LOADER;
+
+        JarFile jarFile = new JarFile(path.toFile());
+
+        JarEntry entry = null;
+
+        for (ModLoader loader : ModLoader.values()) {
+            String fileName = loader.getModConfigFilename();
+
+            entry = jarFile.getJarEntry(fileName);
+
+            if (entry != null) {
+                modLoader = loader;
+            }
+        }
+
+        if (entry == null) {
+            throw new IllegalArgumentException("No config file found in " + path);
+        }
+
+        try (InputStream inputStream = jarFile.getInputStream(entry);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+
+            jarFile.close();
+
+            StringBuilder jsonStringBuilder = new StringBuilder();
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                jsonStringBuilder.append(line);
+            }
+
+            String fileContents = jsonStringBuilder.toString();
+
+            return new Object[]{fileContents, modLoader};
+        }
+    }
+
+    public static boolean deleteFile(Path path) throws IOException {
+        if (Files.isDirectory(path)) {
+            return false;
+        }
+
+        return Files.deleteIfExists(path);
+    }
+
+    public static void createToDisk(Path path, byte[] bytes) throws IOException {
+        if (Files.notExists(path)) {
+            Files.createFile(path);
+        }
+    }
+
+    public static boolean updateFile(@NotNull Mod mod, @NotNull String downloadUrl) throws IOException {
+        String currentFilename = mod.getModFilename();
+
+        var modFileDownload = new Download(downloadUrl, Paths.MINECRAFT_MODS_FOLDER.resolve(mod.getModId().concat("newFile.jar")));
+
+        if (modFileDownload.getResponseCode() != 200) {
+            return false;
+        }
+
+        Path updateFile = modFileDownload.getSavePath();
+
+        if (Files.exists(updateFile)) {
+            System.out.println("Successfully installed update for: " + mod.getModName());
+
+            deleteFile(Paths.MINECRAFT_MODS_FOLDER.resolve(currentFilename));
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static void backupMods() throws IOException {
+        Path backupTo = Paths.MODS_BACKUP_FOLDER;
+
+        if (Files.notExists(backupTo)) {
+            Files.createDirectory(backupTo);
+        }
+
+        try (Stream<Path> modsFolderDir = Files.walk(Paths.MINECRAFT_MODS_FOLDER);
+             ExecutorService service = Executors.newVirtualThreadPerTaskExecutor()) {
+
+            Set<Path> modFiles = modsFolderDir.filter(path -> path.toString().endsWith(".jar"))
+                    .collect(Collectors.toSet());
+
+            if (modFiles.isEmpty()) {
+                return;
+            }
+
+            Callable<Long> backupTask = () -> {
+                long startTimeInMs = System.currentTimeMillis();
+
+                for (Path modFile : modFiles) {
+                    Files.copy(modFile, backupTo.resolve(modFile.getFileName()), StandardCopyOption.REPLACE_EXISTING);
+                }
+
+                long endTimeInMs = System.currentTimeMillis();
+
+                return endTimeInMs - startTimeInMs;
+            };
+
+            Future<Long> backupTaskFuture = service.submit(backupTask);
+
+            double timeTakenInMs = backupTaskFuture.get();
+
+            String outputString = "Backup finished in " + TimeUnitConversion.milliToSecond(timeTakenInMs) + "s";
+
+            System.out.println(outputString);
+
+        } catch (ExecutionException | InterruptedException e) {
+            System.err.println("Unable to backup mods:");
+
+            ErrorLogger.logError(e);
+        }
+    }
+
+    public static @NotNull Set<Mod> loadLocalMods(@Nullable String modsFolderName) {
+        Path pathToRead;
+
+        if (modsFolderName == null) {
+            pathToRead = Paths.MINECRAFT_MODS_FOLDER;
+
+        } else {
+            pathToRead = Paths.MINECRAFT_FOLDER.resolve(modsFolderName);
+        }
+
+        Set<Mod> localMods = ConcurrentHashMap.newKeySet();
+
+        try (Stream<Path> modDir = Files.walk(pathToRead)
+                .filter(path -> path.toString().endsWith(".jar"))) {
+
+            Set<Path> modFilePaths = modDir.collect(Collectors.toSet());
+
+            if (modFilePaths.isEmpty()) {
+                return localMods;
+            }
+
+            modFilePaths.forEach(path -> {
+                Mod mod = Mod.getInfo(path);
+
+                localMods.add(mod);
+            });
+        } catch (Exception e) {
+            ErrorLogger.logError(e);
+
+            return localMods;
+        }
+
+        return localMods;
+    }
+
+    public static void persistDataAsJson(Object data, Type dataType, @NotNull Path absolutePath) throws IOException {
+        if (Files.notExists(absolutePath.getParent())) {
+            Files.createDirectories(absolutePath.getParent());
+        }
+
+        String jsonString = new Gson().toJson(data, dataType);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(absolutePath, StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+
+            writer.write(jsonString);
+        }
+
+    }
+
+    public static void persistDataAsJson(Object data, Type dataType, String absolutePath) throws IOException {
+        persistDataAsJson(data, dataType, Path.of(absolutePath));
+    }
+
+    public static void persistConfigData(Object data, Type dataType, String fileName) throws IOException {
+        Path saveFile = Paths.APP_CONFIG_FOLDER.resolve(fileName);
+
+        persistDataAsJson(data, dataType, saveFile);
+    }
+
+    public static @NotNull String readJsonData(Path absolutePath) throws IOException {
+        try (BufferedReader reader = Files.newBufferedReader(absolutePath, StandardCharsets.UTF_8)) {
+
+            String line;
+            StringBuilder jsonStringBuilder = new StringBuilder();
+
+            while ((line = reader.readLine()) != null) {
+                jsonStringBuilder.append(line);
+            }
+
+            return jsonStringBuilder.toString();
+        }
+
+    }
+
+    public static @NotNull String readJsonData(String absolutePath) throws IOException {
+        return readJsonData(Path.of(absolutePath));
+    }
+
+    public static @NotNull String readConfigData(String fileName) throws IOException {
+        Path saveFile = Paths.APP_CONFIG_FOLDER.resolve(fileName);
+
+        return readJsonData(saveFile);
+    }
+
+}
