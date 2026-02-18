@@ -27,31 +27,10 @@ import java.util.stream.Stream;
 public final class InOut {
 
     @Contract("_ -> new")
-    public static @NotNull Object @NotNull [] readModConfig(Path path) throws IOException {
-        ModLoader modLoader = ModLoader.NO_MOD_LOADER;
+    public static @NotNull String readModConfig(InputStream stream) throws IOException {
 
-        JarFile jarFile = new JarFile(path.toFile());
-
-        JarEntry entry = null;
-
-        for (ModLoader loader : ModLoader.values()) {
-            String fileName = loader.getModConfigFilename();
-
-            entry = jarFile.getJarEntry(fileName);
-
-            if (entry != null) {
-                modLoader = loader;
-            }
-        }
-
-        if (entry == null) {
-            throw new IllegalArgumentException("No config file found in " + path);
-        }
-
-        try (InputStream inputStream = jarFile.getInputStream(entry);
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-
-            jarFile.close();
+        try (InputStreamReader isr = new InputStreamReader(stream);
+             BufferedReader reader = new BufferedReader(isr)) {
 
             StringBuilder jsonStringBuilder = new StringBuilder();
 
@@ -61,9 +40,7 @@ public final class InOut {
                 jsonStringBuilder.append(line);
             }
 
-            String fileContents = jsonStringBuilder.toString();
-
-            return new Object[]{fileContents, modLoader};
+            return jsonStringBuilder.toString();
         }
     }
 

@@ -38,7 +38,7 @@ public final class Paths {
     }
 
     @Contract(pure = true)
-    private static @NotNull Path createPath(String first, String... more) {
+    public static @NotNull Path createPath(String first, String... more) {
         return Path.of(first, more);
     }
 }
