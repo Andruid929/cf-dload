@@ -2,9 +2,15 @@ package net.druidlabs.cfdload.mods;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.druidlabs.cfdload.errorhandling.ErrorLogger;
 import net.druidlabs.cfdload.io.InOut;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.tomlj.Toml;
+import org.tomlj.TomlArray;
+import org.tomlj.TomlParseResult;
+import org.tomlj.TomlTable;
+import org.tomlj.internal.TomlParser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,7 +50,25 @@ public final class ModConfigUtil {
 
     @Contract(value = "_ -> new", pure = true)
     private static String @NotNull [] parseForgeConfig(String fileContents) {
-        return new String[]{};
+        TomlParseResult result = Toml.parse(fileContents);
+
+        if (result.hasErrors()) {
+            result.errors().forEach(ErrorLogger::logError);
+
+            return new String[]{Mod.DEFAULT_ID, Mod.DEFAULT_VERSION, Mod.DEFAULT_NAME};
+        }
+
+        TomlArray modsArray = result.getArray("mods");
+
+
+        assert modsArray != null;
+        TomlTable table = modsArray.getTable(0);
+
+        String id = table.getString("modId");
+        String version = table.getString("version");
+        String name = table.getString("displayName");
+
+        return new String[]{id, version, name};
     }
 
     private static String @NotNull [] parseFabricConfig(String fileContents) {
@@ -60,17 +84,29 @@ public final class ModConfigUtil {
 
     @Contract(value = "_ -> new", pure = true)
     private static String @NotNull [] parseNeoForgeConfig(String fileContents) {
-        return new String[]{};
+        return parseForgeConfig(fileContents);
     }
 
     @Contract(value = "_ -> new", pure = true)
     private static String @NotNull [] parseQuiltConfig(String fileContents) {
-        return new String[]{};
+        JsonObject root = JsonParser.parseString(fileContents)
+                .getAsJsonObject();
+
+        JsonObject quiltLoader = root.getAsJsonObject("quilt_loader");
+
+        String id = quiltLoader.get("id").getAsString();
+        String version = quiltLoader.get("version").getAsString();
+
+        JsonObject metadata = quiltLoader.getAsJsonObject("metadata");
+
+        String name = metadata.get("name").getAsString();
+
+        return new String[]{id, version, name};
     }
 
     public static @NotNull ModConfigUtil readConfig(Path path) throws IOException {
+        try (JarFile modFile = new JarFile(path.toFile())) {
 
-        try(JarFile modFile = new JarFile(path.toFile());) {
             for (ModLoader loader : ModLoader.values()) {
 
                 JarEntry configEntry = modFile.getJarEntry(loader.getModConfigFilename());

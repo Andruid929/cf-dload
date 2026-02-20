@@ -22,11 +22,10 @@ public final class GetModRequest extends Request {
         responseCode = serverResponse.statusCode();
 
         try {
+
             if (responseCode == 200) {
                 response = serverResponse.body();
-
             }
-
 
         } catch (Exception e) {
             ErrorLogger.logError(e);

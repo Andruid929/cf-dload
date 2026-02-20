@@ -1,12 +1,15 @@
 package net.druidlabs.cfdload.mods;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 public enum ModLoader {
 
-    NO_MOD_LOADER("None", "", 0),
-    FORGE("Forge", "mods.toml", 3),
+    NO_MOD_LOADER("None", "non.existent", 0),
+    FORGE("Forge", "META-INF/mods.toml", 3),
     FABRIC("Fabric", "fabric.mod.json", 4),
-    QUILT("Quilt", "", 5),
-    NEO_FORGE("NeoForge", "", 6);
+    QUILT("Quilt", "quilt.mod.json", 5),
+    NEO_FORGE("NeoForge", "META-INF/neoforge.mods.toml", 6);
 
     private final String name;
     private final String modConfigFilename;
@@ -22,7 +25,8 @@ public enum ModLoader {
         return name;
     }
 
-    public String getModConfigFilename() {
+    @Contract(pure = true)
+    public @NotNull String getModConfigFilename() {
         return modConfigFilename;
     }
 

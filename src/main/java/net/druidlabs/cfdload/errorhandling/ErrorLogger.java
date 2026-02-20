@@ -21,7 +21,7 @@ public final class ErrorLogger {
 
     private static final BlockingQueue<String> errorQueue = new LinkedBlockingQueue<>();
 
-    private static final String ERROR_LOG_FILE = "ModupdErr.txt";
+    private static final String ERROR_LOG_FILE = "CFDErr.txt";
 
     static {
         if (Files.notExists(Paths.APP_DIRECTORY)) {
@@ -36,13 +36,13 @@ public final class ErrorLogger {
     private ErrorLogger() {
     }
 
-    public static void logError(Exception e) {
+    public static void logError(Throwable e) {
         ErrorMessageHandler.printSimpleErrorMessage(e);
 
         String errorCause = ErrorMessageHandler.simpleErrorMessage(e);
 
         String stackTrace = Arrays.stream(e.getStackTrace())
-                .map(StackTraceElement::toString)
+                .map(stc -> "\tat ".concat(stc.toString()))
                 .collect(Collectors.joining(System.lineSeparator()));
 
         String toLog = errorCause.concat(System.lineSeparator())

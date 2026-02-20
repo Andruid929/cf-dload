@@ -5,7 +5,6 @@ import io.github.andruid929.leutils.time.TimeUnitConversion;
 import net.druidlabs.cfdload.api.Download;
 import net.druidlabs.cfdload.errorhandling.ErrorLogger;
 import net.druidlabs.cfdload.mods.Mod;
-import net.druidlabs.cfdload.mods.ModLoader;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,8 +18,6 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.Set;
 import java.util.concurrent.*;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,15 +26,14 @@ public final class InOut {
     @Contract("_ -> new")
     public static @NotNull String readModConfig(InputStream stream) throws IOException {
 
-        try (InputStreamReader isr = new InputStreamReader(stream);
-             BufferedReader reader = new BufferedReader(isr)) {
+        try (BufferedInputStream reader = new BufferedInputStream(stream)) {
 
             StringBuilder jsonStringBuilder = new StringBuilder();
 
-            String line;
+            int character;
 
-            while ((line = reader.readLine()) != null) {
-                jsonStringBuilder.append(line);
+            while ((character = reader.read()) != -1) {
+                jsonStringBuilder.append((char) character);
             }
 
             return jsonStringBuilder.toString();

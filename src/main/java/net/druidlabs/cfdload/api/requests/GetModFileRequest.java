@@ -24,9 +24,8 @@ public final class GetModFileRequest extends Request {
 
             if (responseCode == 200) {
                 response = serverResponse.body();
-
-            } else if (responseCode == 404) {
             }
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

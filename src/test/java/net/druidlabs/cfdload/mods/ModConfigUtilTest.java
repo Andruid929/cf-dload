@@ -1,22 +1,20 @@
 package net.druidlabs.cfdload.mods;
 
-import net.druidlabs.cfdload.io.Paths;
+import net.druidlabs.cfdload.TestConstants;
+import net.druidlabs.cfdload.errorhandling.ErrorLogger;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ModConfigUtilTest {
 
     private final ModConfigUtil TEST_CONFIG;
 
     {
-        Path pathToMod = Paths.createPath("src", "test", "resources", "moreitems-1.9.1-1.21.11.jar");
-
         try {
-            TEST_CONFIG = ModConfigUtil.readConfig(pathToMod);
+            TEST_CONFIG = ModConfigUtil.readConfig(TestConstants.PATH_TO_TEST_RESOURCES.resolve("moreitems-1.9.1-1.21.11.jar"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

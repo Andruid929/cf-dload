@@ -4,7 +4,7 @@ public final class Constants {
 
     public static final String ERROR_LOG_TIMESTAMP_FORMAT = "dd/MM/uuuu-HH:mm:ss z";
 
-    public static final String APP_NAME = "Curseforge app downloader";
+    public static final String APP_NAME = "Curseforge mod downloader";
 
     public static final String MODS_BACKUP_FOLDER_NAME = "Installed mods backup";
 
