@@ -1,0 +1,487 @@
+{
+  "data": [
+    {
+      "screenshots": [],
+      "id": 942925,
+      "gameId": 432,
+      "name": "Andruid's items",
+      "slug": "andruids-items",
+      "links": {
+        "websiteUrl": "https://www.curseforge.com/minecraft/mc-mods/andruids-items",
+        "wikiUrl": "https://andrews-mod.fandom.com/wiki/Andruid%27s_items_Wiki",
+        "issuesUrl": null,
+        "sourceUrl": null
+      },
+      "summary": "Miscellaneous new items, blocks, tools, armour(armor)",
+      "status": 4,
+      "downloadCount": 722,
+      "isFeatured": false,
+      "primaryCategoryId": 425,
+      "categories": [
+        {
+          "id": 425,
+          "gameId": 432,
+          "name": "Miscellaneous",
+          "slug": "mc-miscellaneous",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/mc-miscellaneous",
+          "iconUrl": "https://media.forgecdn.net/avatars/6/40/635351497693711265.png",
+          "dateModified": "2014-06-15T04:27:14.543Z",
+          "isClass": false,
+          "classId": 6,
+          "parentCategoryId": 6
+        },
+        {
+          "id": 408,
+          "gameId": 432,
+          "name": "Ores and Resources",
+          "slug": "world-ores-resources",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/world-gen/world-ores-resources",
+          "iconUrl": "https://media.forgecdn.net/avatars/6/23/635351494012336510.png",
+          "dateModified": "2014-05-08T17:36:41.233Z",
+          "isClass": false,
+          "classId": 6,
+          "parentCategoryId": 406
+        },
+        {
+          "id": 434,
+          "gameId": 432,
+          "name": "Armor, Tools, and Weapons",
+          "slug": "armor-weapons-tools",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/armor-weapons-tools",
+          "iconUrl": "https://media.forgecdn.net/avatars/6/47/635351498790409758.png",
+          "dateModified": "2014-05-08T17:44:39.057Z",
+          "isClass": false,
+          "classId": 6,
+          "parentCategoryId": 6
+        },
+        {
+          "id": 436,
+          "gameId": 432,
+          "name": "Food",
+          "slug": "mc-food",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/mc-food",
+          "iconUrl": "https://media.forgecdn.net/avatars/6/49/635351499265510402.png",
+          "dateModified": "2014-05-08T17:45:26.55Z",
+          "isClass": false,
+          "classId": 6,
+          "parentCategoryId": 6
+        }
+      ],
+      "classId": 6,
+      "authors": [
+        {
+          "id": 106359429,
+          "name": "Andruid929",
+          "url": "https://www.curseforge.com/members/andruid929",
+          "avatarUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/a7eccf0d-e301-4363-a50c-a7c21f3278cc-profile_image-150x150.png"
+        }
+      ],
+      "logo": {
+        "id": 911168,
+        "modId": 942925,
+        "title": "638365632161969373.png",
+        "description": "",
+        "thumbnailUrl": "https://media.forgecdn.net/avatars/thumbnails/911/168/256/256/638365632161969373.png",
+        "url": "https://media.forgecdn.net/avatars/911/168/638365632161969373.png"
+      },
+      "mainFileId": 7394017,
+      "latestFiles": [
+        {
+          "id": 4901336,
+          "gameId": 432,
+          "modId": 942925,
+          "isAvailable": true,
+          "displayName": "Moreitems",
+          "fileName": "moreitems-0.1-1.20.1.jar",
+          "releaseType": 3,
+          "fileStatus": 4,
+          "hashes": [
+            {
+              "value": "033be939ce0bb96ab50096ff491ab06e3e779276",
+              "algo": 1
+            },
+            {
+              "value": "2a62f4e8030b5dd1c8f9eac8e2053c56",
+              "algo": 2
+            }
+          ],
+          "fileDate": "2023-11-26T02:49:34.903Z",
+          "fileLength": 86502,
+          "downloadCount": 12,
+          "downloadUrl": "https://edge.forgecdn.net/files/4901/336/moreitems-0.1-1.20.1.jar",
+          "gameVersions": [
+            "Client",
+            "1.20.1",
+            "Forge"
+          ],
+          "sortableGameVersions": [
+            {
+              "gameVersionName": "Client",
+              "gameVersionPadded": "0",
+              "gameVersion": "",
+              "gameVersionReleaseDate": "2022-12-08T00:00:00Z",
+              "gameVersionTypeId": 75208
+            },
+            {
+              "gameVersionName": "1.20.1",
+              "gameVersionPadded": "0000000001.0000000020.0000000001",
+              "gameVersion": "1.20.1",
+              "gameVersionReleaseDate": "2023-06-12T14:26:38.477Z",
+              "gameVersionTypeId": 75125
+            },
+            {
+              "gameVersionName": "Forge",
+              "gameVersionPadded": "0",
+              "gameVersion": "",
+              "gameVersionReleaseDate": "2022-10-01T00:00:00Z",
+              "gameVersionTypeId": 68441
+            }
+          ],
+          "dependencies": [],
+          "alternateFileId": 0,
+          "isServerPack": false,
+          "fileFingerprint": 3277129992,
+          "modules": [
+            {
+              "name": "META-INF",
+              "fingerprint": 2203526111
+            },
+            {
+              "name": "assets",
+              "fingerprint": 3924241444
+            },
+            {
+              "name": "data",
+              "fingerprint": 1478384073
+            },
+            {
+              "name": "net",
+              "fingerprint": 1593756267
+            },
+            {
+              "name": "pack.mcmeta",
+              "fingerprint": 654440237
+            }
+          ]
+        },
+        {
+          "id": 4997936,
+          "gameId": 432,
+          "modId": 942925,
+          "isAvailable": true,
+          "displayName": "Forge beta 0.4",
+          "fileName": "moreitems-0.4-1.20.1.jar",
+          "releaseType": 2,
+          "fileStatus": 4,
+          "hashes": [
+            {
+              "value": "c05ffa26c7bd23bb6650e9a97763a67e264bf5a1",
+              "algo": 1
+            },
+            {
+              "value": "7db6ab3b64d937ff266b6c5941bdc045",
+              "algo": 2
+            }
+          ],
+          "fileDate": "2023-12-31T23:32:20.62Z",
+          "fileLength": 161074,
+          "downloadCount": 65,
+          "downloadUrl": "https://edge.forgecdn.net/files/4997/936/moreitems-0.4-1.20.1.jar",
+          "gameVersions": [
+            "Client",
+            "1.20.1",
+            "Forge"
+          ],
+          "sortableGameVersions": [
+            {
+              "gameVersionName": "Client",
+              "gameVersionPadded": "0",
+              "gameVersion": "",
+              "gameVersionReleaseDate": "2022-12-08T00:00:00Z",
+              "gameVersionTypeId": 75208
+            },
+            {
+              "gameVersionName": "1.20.1",
+              "gameVersionPadded": "0000000001.0000000020.0000000001",
+              "gameVersion": "1.20.1",
+              "gameVersionReleaseDate": "2023-06-12T14:26:38.477Z",
+              "gameVersionTypeId": 75125
+            },
+            {
+              "gameVersionName": "Forge",
+              "gameVersionPadded": "0",
+              "gameVersion": "",
+              "gameVersionReleaseDate": "2022-10-01T00:00:00Z",
+              "gameVersionTypeId": 68441
+            }
+          ],
+          "dependencies": [],
+          "alternateFileId": 0,
+          "isServerPack": false,
+          "fileFingerprint": 3065337839,
+          "modules": [
+            {
+              "name": "META-INF",
+              "fingerprint": 2321881794
+            },
+            {
+              "name": ".cache",
+              "fingerprint": 1307296151
+            },
+            {
+              "name": "assets",
+              "fingerprint": 1045828156
+            },
+            {
+              "name": "data",
+              "fingerprint": 2769315486
+            },
+            {
+              "name": "net",
+              "fingerprint": 1545701068
+            },
+            {
+              "name": "pack.mcmeta",
+              "fingerprint": 654440237
+            }
+          ]
+        },
+        {
+          "id": 5211307,
+          "gameId": 432,
+          "modId": 942925,
+          "isAvailable": true,
+          "displayName": "moreitems-1.4 patch -1.20.4.jar",
+          "fileName": "moreitems-1.4-1.20.4.jar",
+          "releaseType": 2,
+          "fileStatus": 4,
+          "hashes": [
+            {
+              "value": "0ca8e24e949d1530f7addabd52bcf66fe4e53b8b",
+              "algo": 1
+            },
+            {
+              "value": "1a64dab9e5ecd7708c7aeff2e5fdd129",
+              "algo": 2
+            }
+          ],
+          "fileDate": "2024-03-25T21:04:13.473Z",
+          "fileLength": 5953282,
+          "downloadCount": 17,
+          "downloadUrl": "https://edge.forgecdn.net/files/5211/307/moreitems-1.4-1.20.4.jar",
+          "gameVersions": [
+            "Fabric",
+            "1.20.4"
+          ],
+          "sortableGameVersions": [
+            {
+              "gameVersionName": "Fabric",
+              "gameVersionPadded": "0",
+              "gameVersion": "",
+              "gameVersionReleaseDate": "2022-09-01T00:00:00Z",
+              "gameVersionTypeId": 68441
+            },
+            {
+              "gameVersionName": "1.20.4",
+              "gameVersionPadded": "0000000001.0000000020.0000000004",
+              "gameVersion": "1.20.4",
+              "gameVersionReleaseDate": "2023-12-07T15:17:47.907Z",
+              "gameVersionTypeId": 75125
+            }
+          ],
+          "dependencies": [],
+          "alternateFileId": 0,
+          "isServerPack": false,
+          "fileFingerprint": 2721026304,
+          "modules": [
+            {
+              "name": "META-INF",
+              "fingerprint": 1078501786
+            },
+            {
+              "name": "assets",
+              "fingerprint": 3807122076
+            },
+            {
+              "name": "data",
+              "fingerprint": 1162826888
+            },
+            {
+              "name": "fabric.mod.json",
+              "fingerprint": 556655618
+            },
+            {
+              "name": "moreitems-refmap.json",
+              "fingerprint": 888777166
+            },
+            {
+              "name": "moreitems.mixins.json",
+              "fingerprint": 1404200906
+            },
+            {
+              "name": "net",
+              "fingerprint": 1218543344
+            }
+          ]
+        },
+        {
+          "id": 7394017,
+          "gameId": 432,
+          "modId": 942925,
+          "isAvailable": true,
+          "displayName": "moreitems-1.9.1-1.21.11.jar",
+          "fileName": "moreitems-1.9.1-1.21.11.jar",
+          "releaseType": 1,
+          "fileStatus": 4,
+          "hashes": [
+            {
+              "value": "bb6a217d04c1e6b1f9eed446982f932142599304",
+              "algo": 1
+            },
+            {
+              "value": "a3e058fc4a7525b69991f2e0a397e1cb",
+              "algo": 2
+            }
+          ],
+          "fileDate": "2025-12-29T20:53:18.093Z",
+          "fileLength": 5899850,
+          "downloadCount": 8,
+          "fileSizeOnDisk": 6016666,
+          "downloadUrl": "https://edge.forgecdn.net/files/7394/17/moreitems-1.9.1-1.21.11.jar",
+          "gameVersions": [
+            "Client",
+            "Fabric",
+            "1.21.11"
+          ],
+          "sortableGameVersions": [
+            {
+              "gameVersionName": "Client",
+              "gameVersionPadded": "0",
+              "gameVersion": "",
+              "gameVersionReleaseDate": "2022-12-08T00:00:00Z",
+              "gameVersionTypeId": 75208
+            },
+            {
+              "gameVersionName": "Fabric",
+              "gameVersionPadded": "0",
+              "gameVersion": "",
+              "gameVersionReleaseDate": "2022-09-01T00:00:00Z",
+              "gameVersionTypeId": 68441
+            },
+            {
+              "gameVersionName": "1.21.11",
+              "gameVersionPadded": "0000000001.0000000021.0000000011",
+              "gameVersion": "1.21.11",
+              "gameVersionReleaseDate": "2025-12-09T16:42:14.27Z",
+              "gameVersionTypeId": 77784
+            }
+          ],
+          "dependencies": [],
+          "alternateFileId": 0,
+          "isServerPack": false,
+          "fileFingerprint": 170434774,
+          "modules": [
+            {
+              "name": "META-INF",
+              "fingerprint": 463424022
+            },
+            {
+              "name": "assets",
+              "fingerprint": 716798891
+            },
+            {
+              "name": "data",
+              "fingerprint": 123394222
+            },
+            {
+              "name": "fabric.mod.json",
+              "fingerprint": 3660045368
+            },
+            {
+              "name": "moreitems.mixins.json",
+              "fingerprint": 3631225796
+            },
+            {
+              "name": "net",
+              "fingerprint": 1988402250
+            }
+          ]
+        }
+      ],
+      "latestFilesIndexes": [
+        {
+          "gameVersion": "1.21.11",
+          "fileId": 7394017,
+          "filename": "moreitems-1.9.1-1.21.11.jar",
+          "releaseType": 1,
+          "gameVersionTypeId": 77784,
+          "modLoader": 4
+        },
+        {
+          "gameVersion": "1.21.10",
+          "fileId": 7330543,
+          "filename": "moreitems-1.8-1.21.10.jar",
+          "releaseType": 1,
+          "gameVersionTypeId": 77784,
+          "modLoader": 4
+        },
+        {
+          "gameVersion": "1.21.9",
+          "fileId": 7324887,
+          "filename": "moreitems-1.7-1.21.9.jar",
+          "releaseType": 1,
+          "gameVersionTypeId": 77784,
+          "modLoader": 4
+        },
+        {
+          "gameVersion": "1.20.4",
+          "fileId": 5227038,
+          "filename": "moreitems-1.5-1.20.4.jar",
+          "releaseType": 1,
+          "gameVersionTypeId": 75125,
+          "modLoader": 4
+        },
+        {
+          "gameVersion": "1.20.4",
+          "fileId": 5211307,
+          "filename": "moreitems-1.4-1.20.4.jar",
+          "releaseType": 2,
+          "gameVersionTypeId": 75125,
+          "modLoader": 4
+        },
+        {
+          "gameVersion": "1.20.1",
+          "fileId": 4997936,
+          "filename": "moreitems-0.4-1.20.1.jar",
+          "releaseType": 2,
+          "gameVersionTypeId": 75125,
+          "modLoader": 1
+        },
+        {
+          "gameVersion": "1.20.1",
+          "fileId": 4901336,
+          "filename": "moreitems-0.1-1.20.1.jar",
+          "releaseType": 3,
+          "gameVersionTypeId": 75125,
+          "modLoader": 1
+        }
+      ],
+      "latestEarlyAccessFilesIndexes": [],
+      "dateCreated": "2023-11-26T08:59:06.83Z",
+      "dateModified": "2025-12-29T20:59:19.697Z",
+      "dateReleased": "2025-12-29T20:53:18.093Z",
+      "allowModDistribution": false,
+      "gamePopularityRank": 75921,
+      "isAvailable": true,
+      "hasCommentsEnabled": true,
+      "thumbsUpCount": 0,
+      "featuredProjectTag": 0
+    }
+  ],
+  "pagination": {
+    "index": 0,
+    "pageSize": 50,
+    "resultCount": 1,
+    "totalCount": 1
+  }
+}

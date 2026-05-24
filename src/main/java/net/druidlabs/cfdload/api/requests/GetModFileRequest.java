@@ -9,12 +9,14 @@ import java.net.http.HttpResponse;
 
 public final class GetModFileRequest extends Request {
 
-    private final int fileId;
+    private final int requestedProjectId;
+    private final int requestedFileId;
 
-    private GetModFileRequest(@NotNull ForgeURL requestURL, int fileId) {
+    private GetModFileRequest(@NotNull ForgeURL requestURL, int requestedProjectId, int requestedFileId) {
         super(requestURL);
 
-        this.fileId = fileId;
+        this.requestedFileId = requestedFileId;
+        this.requestedProjectId = requestedProjectId;
     }
 
     @Override
@@ -31,10 +33,18 @@ public final class GetModFileRequest extends Request {
         }
     }
 
+    public int getRequestedProjectId() {
+        return requestedProjectId;
+    }
+
+    public int getRequestedFileId() {
+        return requestedFileId;
+    }
+
     public static @NotNull GetModFileRequest getModFileUrl(int projectId, int fileId) throws IOException {
         ForgeURL url = ForgeURL.newBuilder("v1", "mods", String.valueOf(projectId),
                 "files", String.valueOf(fileId), "download-url").build();
 
-        return new GetModFileRequest(url, fileId);
+        return new GetModFileRequest(url, projectId, fileId);
     }
 }

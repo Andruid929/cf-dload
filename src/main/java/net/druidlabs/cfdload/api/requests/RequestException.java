@@ -10,6 +10,10 @@ public class RequestException extends RuntimeException {
         this.message = message;
     }
 
+    public RequestException(String message) {
+        this.message = message;
+    }
+
     @Override
     public String getMessage() {
         return message;

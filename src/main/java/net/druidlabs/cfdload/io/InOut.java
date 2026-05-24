@@ -1,10 +1,13 @@
 package net.druidlabs.cfdload.io;
 
 import com.google.gson.Gson;
+
 import io.github.andruid929.leutils.time.TimeUnitConversion;
+
 import net.druidlabs.cfdload.api.Download;
 import net.druidlabs.cfdload.errorhandling.ErrorLogger;
 import net.druidlabs.cfdload.mods.Mod;
+
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +28,6 @@ public final class InOut {
 
     @Contract("_ -> new")
     public static @NotNull String readModConfig(InputStream stream) throws IOException {
-
         try (BufferedInputStream reader = new BufferedInputStream(stream)) {
 
             StringBuilder jsonStringBuilder = new StringBuilder();
@@ -142,7 +144,7 @@ public final class InOut {
             }
 
             modFilePaths.forEach(path -> {
-                Mod mod = Mod.getInfo(path);
+                Mod mod = Mod.getInfo(path, false);
 
                 localMods.add(mod);
             });

@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 
 public final class ResponseHandler {
 
-    public static final String LATEST_FILES_INDEXES = "latestFilesIndexes";
     public static final String MOD_PROJECT_ID = "id";
 
     private final JsonObject root;
@@ -57,10 +56,10 @@ public final class ResponseHandler {
         return handleSearchModResponse(response, 0);
     }
 
-    public static @NotNull ResponseHandler handleGetFileUrlResponse(String response) {
+    public static @NotNull String getFileUrlResponse(String response) {
         JsonElement root = JsonParser.parseString(response);
 
-        return new ResponseHandler(root.getAsJsonObject());
+        return new ResponseHandler(root.getAsJsonObject()).asString("data");
     }
 
 }

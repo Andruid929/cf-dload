@@ -47,6 +47,10 @@ public class Mod {
         return modLoaderId;
     }
 
+    public String getModLoaderName() {
+        return getModLoader().getName();
+    }
+
     public ModLoader getModLoader() {
         for (ModLoader loader : ModLoader.values()) {
             if (loader.getLoaderId() == this.modLoaderId) {
@@ -57,11 +61,10 @@ public class Mod {
         throw new IllegalStateException("No mod loader under ID " + this.modLoaderId);
     }
 
-    @Contract("_ -> new")
-    public static @NotNull Mod getInfo(@NotNull Path path) {
+    public static @NotNull Mod getInfo(@NotNull Path path, boolean ignoreExtension) {
         String filename = path.getFileName().toString();
 
-        if (!filename.endsWith(".jar")) {
+        if (!filename.endsWith(".jar") && !ignoreExtension) {
             IllegalArgumentException exception = new IllegalArgumentException("\"" + filename + "\" is not a mod file");
 
             ErrorLogger.logError(exception);
